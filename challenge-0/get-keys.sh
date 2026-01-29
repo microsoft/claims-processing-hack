@@ -43,10 +43,6 @@ echo "Getting the output parameters from the last deployment '$deploymentName' i
 echo "Extracting the resource names from the deployment outputs..."
 storageAccountName=$(az deployment group show --resource-group $resourceGroupName --name $deploymentName --query "properties.outputs.storageAccountName.value" -o tsv 2>/dev/null || echo "")
 logAnalyticsWorkspaceName=$(az deployment group show --resource-group $resourceGroupName --name $deploymentName --query "properties.outputs.logAnalyticsWorkspaceName.value" -o tsv 2>/dev/null || echo "")
-if [ -z "$logAnalyticsWorkspaceName" ]; then
-    echo "No Log Analytics workspace found. Please enter the workspace name manually:"
-    read logAnalyticsWorkspaceName
-fi
 logAnalyticsWorkspaceId=$(az monitor log-analytics workspace show --resource-group $resourceGroupName --workspace-name $logAnalyticsWorkspaceName --query customerId -o tsv 2>/dev/null || echo "")
 searchServiceName=$(az deployment group show --resource-group $resourceGroupName --name $deploymentName --query "properties.outputs.searchServiceName.value" -o tsv 2>/dev/null || echo "")
 aiFoundryHubName=$(az deployment group show --resource-group $resourceGroupName --name $deploymentName --query "properties.outputs.aiFoundryHubName.value" -o tsv 2>/dev/null || echo "")
@@ -64,7 +60,6 @@ aiFoundryProjectEndpoint=$(az deployment group show --resource-group $resourceGr
 documentIntelligenceEndpoint=$(az deployment group show --resource-group $resourceGroupName --name $deploymentName --query "properties.outputs.documentIntelligenceEndpoint.value" -o tsv 2>/dev/null || echo "")
 containerAppEnvironmentName=$(az deployment group show --resource-group $resourceGroupName --name $deploymentName --query "properties.outputs.containerAppEnvironmentName.value" -o tsv 2>/dev/null || echo "")
 apiManagementGatewayUrl=$(az deployment group show --resource-group $resourceGroupName --name $deploymentName --query "properties.outputs.apiManagementGatewayUrl.value" -o tsv 2>/dev/null || echo "")
-
 
 
 # If deployment outputs are empty, try to discover resources by type
