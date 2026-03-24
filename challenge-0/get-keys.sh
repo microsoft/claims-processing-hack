@@ -353,6 +353,7 @@ echo "AZURE_OPENAI_SERVICE_NAME=\"$aiFoundryHubName\"" >> ../.env
 echo "AZURE_OPENAI_ENDPOINT=\"$aiFoundryEndpoint\"" >> ../.env
 echo "AZURE_OPENAI_KEY=\"$aiFoundryKey\"" >> ../.env
 echo "AZURE_OPENAI_DEPLOYMENT_NAME=\"gpt-4.1-mini\"" >> ../.env
+echo "AZURE_OPENAI_EMBEDDING_DEPLOYMENT=\"text-embedding-ada-002\"" >> ../.env
 echo "AZURE_OPENAI_API_VERSION=\"2024-12-01-preview\"" >> ../.env
 echo "MODEL_DEPLOYMENT_NAME=\"gpt-4.1-mini\"" >> ../.env
 
