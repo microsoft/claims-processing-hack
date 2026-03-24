@@ -52,7 +52,9 @@ Resource deployment can take up to 10 minutes, afterwards you'll be able to find
 
 ## 1.4 Verify the creation of your resources
 
-Go to your [`Azure Portal`](https://portal.azure.com/) and find your `Resource Group`that should by now contain 10 Azure resources.
+Go to your [`Azure Portal`](https://portal.azure.com/) and find your `Resource Groups`. You should have two resource groups:
+- **Your Resource Group**: contains general resources (storage, search, Cosmos DB, Document Intelligence, Container Registry, API Management, etc.) — should contain approximately 10 Azure resources.
+- **RG_Foundry**: contains AI Foundry and OpenAI resources (AI Foundry hub and project).
 
 
 ## 1.5 Let's retrieve the necessary keys
@@ -63,10 +65,10 @@ After deploying resources, configure environment variables in the `.env` file. E
 cd challenge-0 && ./get-keys.sh --resource-group YOUR_RESOURCE_GROUP_NAME
 ```
 
-Replace `YOUR_RESOURCE_GROUP_NAME` with the actual name of the resource group created.
+Replace `YOUR_RESOURCE_GROUP_NAME` with the name of the resource group containing the general resources (storage, search, etc.). The AI Foundry / OpenAI resources are automatically retrieved from the `RG_Foundry` resource group.
 
 This script will:
-1. Connect to Azure and fetch the necessary keys
+1. Connect to Azure and fetch the necessary keys from your resource group and the `RG_Foundry` resource group
 2. **Assign Azure AI Developer and Cognitive Services User roles** to your user account (required for AI Foundry agent management)
 3. Populate the `.env` file with the required values in the root directory of the repository
 
