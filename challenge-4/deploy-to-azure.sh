@@ -33,23 +33,19 @@ echo "   Container App Environment: $ENVIRONMENT_NAME"
 echo "   App Name: $APP_NAME"
 echo ""
 
-# Step 1: Build Docker image
-echo "🔨 Step 1: Building Docker image..."
+# Step 1: Build and push image using ACR Tasks (builds on Azure as linux/amd64)
+echo "🔨 Step 1: Building and pushing image via ACR Tasks..."
 cd "$WORKSPACE_ROOT"
-docker build -f challenge-4/Dockerfile -t $IMAGE_NAME:$IMAGE_TAG .
+az acr build \
+    --registry $ACR_NAME \
+    --image $IMAGE_NAME:$IMAGE_TAG \
+    --platform linux/amd64 \
+    -f challenge-4/Dockerfile \
+    .
 cd "$SCRIPT_DIR"
 
-# Step 2: Login to ACR
-echo "🔐 Step 2: Logging in to Azure Container Registry..."
-az acr login --name $ACR_NAME
-
-# Step 3: Tag and push image
-echo "📤 Step 3: Pushing image to ACR..."
-docker tag $IMAGE_NAME:$IMAGE_TAG $ACR_NAME.azurecr.io/$IMAGE_NAME:$IMAGE_TAG
-docker push $ACR_NAME.azurecr.io/$IMAGE_NAME:$IMAGE_TAG
-
-# Step 4: Verify Container App Environment exists (created in Challenge 0)
-echo "🏗️  Step 4: Verifying Container App Environment..."
+# Step 2: Verify Container App Environment exists (created in Challenge 0)
+echo "🏗️  Step 2: Verifying Container App Environment..."
 if ! az containerapp env show --name $ENVIRONMENT_NAME --resource-group $RESOURCE_GROUP &>/dev/null; then
     echo "   ❌ Error: Container App Environment not found: $ENVIRONMENT_NAME"
     echo "   Please run Challenge 0 deployment first to create the infrastructure."
@@ -58,8 +54,8 @@ else
     echo "   ✅ Environment exists: $ENVIRONMENT_NAME"
 fi
 
-# Step 5: Deploy Container App
-echo "🚢 Step 5: Deploying Container App..."
+# Step 3: Deploy Container App
+echo "🚢 Step 3: Deploying Container App..."
 
 # Check if app exists
 if az containerapp show --name $APP_NAME --resource-group $RESOURCE_GROUP &>/dev/null; then
@@ -90,8 +86,8 @@ else
             MISTRAL_DOCUMENT_AI_DEPLOYMENT_NAME="$MISTRAL_DOCUMENT_AI_DEPLOYMENT_NAME"
 fi
 
-# Step 6: Enable managed identity (optional but recommended)
-echo "🔑 Step 6: Enabling managed identity..."
+# Step 4: Enable managed identity (optional but recommended)
+echo "🔑 Step 4: Enabling managed identity..."
 az containerapp identity assign \
     --name $APP_NAME \
     --resource-group $RESOURCE_GROUP \
@@ -109,7 +105,7 @@ az role assignment create \
     --scope "/subscriptions/$(az account show --query id -o tsv)/resourceGroups/$RESOURCE_GROUP" \
     2>/dev/null || echo "   Role assignment already exists"
 
-# Step 7: Get app URL
+# Step 5: Get app URL
 echo ""
 echo "✅ Deployment Complete!"
 echo ""
