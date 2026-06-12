@@ -144,7 +144,7 @@ Analyze the claim against the policy coverage and produce the coverage determina
 
             response = openai_client.responses.create(
                 input=user_query,
-                extra_body={"agent": {"name": agent.name, "type": "agent_reference"}},
+                extra_body={"agent_reference": {"name": agent.name, "type": "agent_reference"}},
             )
 
             response_text = response.output_text.strip()
