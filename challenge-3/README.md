@@ -135,8 +135,8 @@ Integrate now to establish observability before production deployment.
 ![alt text](images/chal3_4.png)
 
 > **Note:** If prompted about missing permissions, click the **Resolve** button to automatically create the required Reader role assignment on the Application Insights resource.
-![alt text](images/chal3_14.png)
 
+![alt text](images/chal3_14.png)
 
 
 7. The new Microsoft Foundry experience has provided easy access to configure the most advanced monitoring options for your agents. Let's explore them one by one. For more information, please have a look at the [documentation](https://learn.microsoft.com/en-us/azure/ai-foundry/concepts/observability?view=foundry) provided on the official Microsoft Learn website.
