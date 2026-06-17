@@ -302,7 +302,7 @@
       "name": "[format('{0}/{1}', variables('aiFoundryName'), 'mistral-document-ai-2505')]",
       "sku": {
         "name": "GlobalStandard",
-        "capacity": 1
+        "capacity": 30
       },
       "properties": {
         "model": {

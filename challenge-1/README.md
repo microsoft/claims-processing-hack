@@ -96,11 +96,25 @@ The `statements_processing` folder contains advanced examples showcasing differe
 - Ideal for complex, unstructured claim narratives
 - Provides high-quality extraction with natural language understanding
 
+Execute the below commands to run the processing:
+```
+cd /workspaces/claims-processing-hack/challenge-1/statements_processing
+
+python gpt_statement_processing.py
+```
+
 **Mistral Document Intelligence (`mistral_doc_intelligence.py`)**
 - Leverages Mistral's specialized document AI models
 - Optimized for structured document processing at scale
 - Cost-effective for high-volume statement processing
 - Fast inference times for batch operations
+
+Execute the below commands to run the processing:
+```
+cd /workspaces/claims-processing-hack/challenge-1/statements_processing
+
+python mistral_doc_intelligence.py
+```
 
 **Azure Document Intelligence Integration**
 - Demonstrates prebuilt models for form and document extraction
@@ -110,10 +124,33 @@ The `statements_processing` folder contains advanced examples showcasing differe
 
 This comparison helps you understand when to use each approach based on document type, volume, complexity, and cost considerations. Review the implementations to see practical examples of model selection and integration strategies.
 
-## Task 2 - Image and Claims Processing
-> **Note:** You must run mistral_doc_intelligence.py before starting this part or copy the contents of the `examples/mistral` folder to `./output/mistral`.
+## Before You Start: Notebook Setup
 
-Time to extract information from claim images! Please navigate to `scripts/imageprocessing.ipynb` for a detailed implementation of:
+Tasks 2 and 3 use Jupyter notebooks inside VS Code. Follow these steps **once** when opening each notebook to ensure the correct Python environment is used.
+
+### Step 1 - Select the Python Kernel
+
+When you open a notebook for the first time, VS Code will prompt you to select a kernel. If it does not, click the kernel name in the top-right corner of the notebook to open the picker.
+
+1. Choose **Python Environments...**
+
+   <img src="images/vscode-kernel-source.png" alt="Select kernel source — choose Python Environments" width="420" style="display: block; margin: 8px 0;">
+
+2. Select **Python 3.11.13 /usr/local/bin/python** — labelled **Global Env**
+
+   <img src="images/vscode-kernel-python.png" alt="Select Python 3.11.13 Global Env" width="420" style="display: block; margin: 8px 0;">
+
+
+### Step 2 - Run Each Cell
+
+Execute cells **one at a time from top to bottom** using the **▷ Run Cell** button at the top-left corner of each code cell. Many cells depend on variables or resources created by earlier cells, so running them out of order will cause errors.
+
+---
+
+## Task 2 - Image and Claims Processing
+> **Note:** You must run `mistral_doc_intelligence.py` before starting this task, or copy the contents of the `examples/mistral` folder into `./output/mistral`.
+
+Open [`scripts/imageprocessing.ipynb`](scripts/imageprocessing.ipynb) and run each cell in order using the **▷ Run Cell** button. The notebook covers:
 - Processing insurance claim photos and accident documentation
 - Extracting text from images using GPT-4-1-mini vision capabilities
 - Performing OCR on handwritten statements and invoices
@@ -124,7 +161,7 @@ This notebook showcases multimodal AI processing techniques for analyzing damage
 
 ## Task 3 - Policy Document Processing
 
-Time to process your insurance policy documents! Please navigate to `scripts/policiesprocessing.ipynb` for a comprehensive walkthrough on:
+Open [`scripts/policiesprocessing.ipynb`](scripts/policiesprocessing.ipynb) and run each cell in order using the **▷ Run Cell** button. The notebook covers:
 - Setting up Azure Blob Storage for document management
 - Processing text-based policy documents using GPT-4-1-mini
 - Extracting structured information from policy markdown files

@@ -134,6 +134,10 @@ Integrate now to establish observability before production deployment.
 
 ![alt text](images/chal3_4.png)
 
+> **Note:** If prompted about missing permissions, click the **Resolve** button to automatically create the required Reader role assignment on the Application Insights resource.
+
+![alt text](images/chal3_14.png)
+
 
 7. The new Microsoft Foundry experience has provided easy access to configure the most advanced monitoring options for your agents. Let's explore them one by one. For more information, please have a look at the [documentation](https://learn.microsoft.com/en-us/azure/ai-foundry/concepts/observability?view=foundry) provided on the official Microsoft Learn website.
 
@@ -167,7 +171,10 @@ For enterprise-grade evaluations, experts in the domain in which the agents are 
 
 1. So, we can use Microsoft's Foundry Synthetic Generation button to generate this dataset for us. 
 2. Let's add the **ground-truth.json** file as a seed data, and leave all other values by default.
-3. On the criteria section, you will be suggested 18 evaluators for this agent. Let's leave that by default and click on next and then click on **Submit**.
+![alt text](images/chal3_15.png)
+
+3. On the criteria section, you will be suggested 20 evaluators for this agent. Let's leave that by default and click on next and then click on **Submit**.
+![alt text](images/chal3_16.png)
 
 This step will look at the original data, look at the agent prompt and generate synthetic data to run against this agent, and then will run this synthetic data agaisnt the 18 evaluators we have set. This should take some minutes. Meanwhile, let's explore the other two options we have for monitoring:
 
@@ -188,7 +195,7 @@ And then click on the Monitor section:
 
 ![alt text](images/chal3_10.png)
 
-Now, we are able to see the Microsoft Foundry Observability dashboard that provides a centralized view of your agent's health and performance:
+After some time, we will able to see the Microsoft Foundry Observability dashboard that provides a centralized view of your agent's health and performance:
 
 | Category | Features | Purpose |
 |----------|----------|---------|
@@ -199,7 +206,7 @@ Now, we are able to see the Microsoft Foundry Observability dashboard that provi
 | **Actionable Intelligence** | Cost optimization insights, quality degradation detection, performance tracking (latency, throughput, errors) | Proactively identify and resolve issues before user impact |
 
 
-This dashboard, will look something like this:
+This dashboard, will look something like this after data is loaded into Application Insights:
 
 ![alt text](images/chal3_11.png)
 

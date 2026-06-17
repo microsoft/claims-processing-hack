@@ -39,6 +39,7 @@ logger = logging.getLogger(__name__)
 PROJECT_ENDPOINT = os.environ.get("AI_FOUNDRY_PROJECT_ENDPOINT")
 MODEL_DEPLOYMENT_NAME = os.environ.get("MODEL_DEPLOYMENT_NAME", "gpt-4o-mini")
 SEARCH_SERVICE_ENDPOINT = os.environ.get("SEARCH_SERVICE_ENDPOINT")
+SEARCH_ADMIN_KEY = os.environ.get("SEARCH_ADMIN_KEY", "")
 SEARCH_INDEX_NAME = os.environ.get("SEARCH_INDEX_NAME", "insurance-documents-index")
 
 # Policy code to friendly name mapping (for validation)
@@ -71,11 +72,11 @@ def search_policy_document(policy_number: str) -> str:
                 "policy_number": policy_number,
             })
 
-        # Create search client using DefaultAzureCredential
+        # Create search client using API key (consistent with Challenge 1 indexing)
         search_client = SearchClient(
             endpoint=SEARCH_SERVICE_ENDPOINT,
             index_name=SEARCH_INDEX_NAME,
-            credential=DefaultAzureCredential(),
+            credential=AzureKeyCredential(SEARCH_ADMIN_KEY),
         )
 
         # Hybrid search: use the policy code as the primary query
@@ -83,7 +84,7 @@ def search_policy_document(policy_number: str) -> str:
             search_text=policy_number,
             top=3,
             query_type="semantic",
-            semantic_configuration_name="default",
+            semantic_configuration_name="insurance-semantic",
         )
 
         matched_docs = []
@@ -264,7 +265,7 @@ Return the structured JSON coverage summary."""
 
             response = openai_client.responses.create(
                 input=user_query,
-                extra_body={"agent": {"name": agent.name, "type": "agent_reference"}},
+                extra_body={"agent_reference": {"name": agent.name, "type": "agent_reference"}},
             )
 
             response_text = response.output_text.strip()
